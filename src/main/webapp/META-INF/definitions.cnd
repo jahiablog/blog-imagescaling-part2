@@ -1,0 +1,15 @@
+<jnt = 'http://www.jahia.org/jahia/nt/1.0'>
+<jmix = 'http://www.jahia.org/jahia/mix/1.0'>
+<blogin = 'http://riesvantwisk.com/rvt/nt'>
+<blogmix = 'http://riesvantwisk.com/rvt/mix'>
+
+[blogin:blogimagescalingbydef] > jnt:content, jmix:editorialContent, jmix:structuredContent
+ - width (long) indexed=no mandatory
+ - height (long) indexed=no mandatory
+ - image (weakreference, picker[type='image']) i18n mandatory
+
+[blogmix:blogimagescalingfolder] mixin
+ itemtype = content
+ extends = jnt:folder
+ - blogmix:width (long) indexed=no
+ - blogmix:height (long) indexed=no

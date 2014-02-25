@@ -1,0 +1,41 @@
+###############################################################################
+package org.jahia.modules.blogimagescalingp2.rules
+
+#list any import classes here.
+import org.jahia.services.content.rules.*
+import org.slf4j.Logger
+import org.jahia.modules.blogimagescalingp2.rules.BlogImageScalingService;
+
+expander rules.dsl
+
+#declare any global variables here
+global User user
+global Service service
+global ImageService imageService
+global ExtractionService extractionService
+global Logger logger
+global BlogImageScalingService blogImageScalingService
+###############################################################################
+
+rule "Blog Image Scaling part 2 - rescale by definitionvalue"
+   when
+       A property image has been set on a node
+        - the node has the type blogin:blogimagescalingbydef
+        - not in operation import
+   then
+        > long timer = System.currentTimeMillis();
+        > blogImageScalingService.cropScale(property, "blogimagescalingbydef", drools);
+        Log "Blog Image Scaling part 2 rescale by definition value : Image " + node.getPath() + " updated in " + (System.currentTimeMillis() - timer) + " ms"
+end
+
+rule "Blog Image Scaling part 2 - rescale within directory"
+    salience 25
+    when
+        A file content has been modified
+             - the mimetype matches image/.*
+    then
+        > long timer = System.currentTimeMillis();
+        > blogImageScalingService.cropScaleFolderImage(node, "blogimagescalingbyfolder", true, drools);
+        Dispose image
+        Log "Blog Image Scaling part 2 rescale by folder configuration : Image " + node.getPath() + " updated in " + (System.currentTimeMillis() - timer) + " ms"
+end
