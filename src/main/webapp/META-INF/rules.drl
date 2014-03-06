@@ -29,7 +29,6 @@ rule "Blog Image Scaling part 2 - rescale by definitionvalue"
 end
 
 rule "Blog Image Scaling part 2 - rescale within directory"
-    salience 25
     when
         A file content has been modified
              - the mimetype matches image/.*

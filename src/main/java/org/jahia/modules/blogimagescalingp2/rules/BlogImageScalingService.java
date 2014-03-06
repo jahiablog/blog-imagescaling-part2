@@ -264,7 +264,7 @@ public class BlogImageScalingService {
             if (logger.isDebugEnabled()) {
                 logger.warn("Error reading j:width/j:height properties on node " + node.getPath(), e);
             } else {
-                logger.warn("Error reading j:width/j:height properties on node " + node.getPath() + ". Casue: " + e.getMessage());
+                logger.warn("Error reading j:width/j:height properties on node " + node.getPath() + ". Cause: " + e.getMessage());
             }
         }
 
